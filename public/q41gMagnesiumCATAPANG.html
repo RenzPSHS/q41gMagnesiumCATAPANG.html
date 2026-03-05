@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Tracker</title>
     <style>
-        /* CSS Implementation (Rubric Item 2) */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f7f6;
@@ -48,22 +47,20 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            box-sizing: border-box;
         }
 
-        /* Star Rating Styles */
         .stars {
             font-size: 24px;
-            color: #d3d3d3; /* Gray default */
+            color: #d3d3d3;
             cursor: pointer;
             user-select: none;
         }
 
         .stars span.active {
-            color: #f1c40f; /* Yellow active */
+            color: #f1c40f;
         }
 
-        /* Button Styles */
         .btn {
             width: 100%;
             padding: 12px;
@@ -81,7 +78,6 @@
             background-color: #485ce0;
         }
 
-        /* Movie List Styles */
         .movie-list-section {
             margin-top: 30px;
             border-top: 1px solid #eee;
@@ -193,33 +189,25 @@
                 rating: currentRating.toString()
             };
 
-            // Retrieve existing array from localStorage, or default to empty array
             let moviesArray = JSON.parse(localStorage.getItem('movies')) || [];
             
-            // Add new movie object to the array
             moviesArray.push(newMovie);
 
-            // Stringify and save back to localStorage
             localStorage.setItem('movies', JSON.stringify(moviesArray));
 
-            // Reset the form for the next entry
             document.getElementById('title').value = '';
             document.getElementById('year').value = '';
             currentRating = 0;
             updateFormStars(0);
 
-            // Refresh the displayed list
             loadMovies();
         });
 
         function loadMovies() {
-            // Clear current list
             movieListContainer.innerHTML = '';
-            
-            // Get data from localStorage
+
             let moviesArray = JSON.parse(localStorage.getItem('movies')) || [];
 
-            // Loop through each movie and build the HTML
             moviesArray.forEach(movie => {
                 const movieDiv = document.createElement('div');
                 movieDiv.className = 'movie-item';
