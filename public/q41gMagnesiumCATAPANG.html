@@ -91,6 +91,11 @@
             border-radius: 5px;
             margin-bottom: 10px;
             font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .display-stars {
@@ -101,12 +106,26 @@
         .display-stars .gray {
             color: #d3d3d3;
         }
+
+        .delete-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 2px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .delete-btn:hover {
+            background-color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>Add a Movie</h2>
+        <h2>Add / Update a Movie Rating</h2>
         
         <div class="form-group">
             <label for="title">Title:</label>
@@ -145,7 +164,7 @@
         <div class="movie-list-section">
             <h2>Movie List</h2>
             <div id="movie-list-container">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -173,7 +192,7 @@
         }
 
         addBtn.addEventListener('click', function() {
-            const title = document.getElementById('title').value;
+            const title = document.getElementById('title').value.trim();
             const year = document.getElementById('year').value;
             const genre = document.getElementById('genre').value;
 
@@ -182,16 +201,34 @@
                 return;
             }
 
-            const newMovie = {
-                title: title,
-                year: year.toString(),
-                genre: genre,
-                rating: currentRating.toString()
-            };
-
             let moviesArray = JSON.parse(localStorage.getItem('movies')) || [];
             
-            moviesArray.push(newMovie);
+            let existingMovieIndex = moviesArray.findIndex(m => m.title.toLowerCase() === title.toLowerCase());
+
+            if (existingMovieIndex !== -1) {
+                let existingMovie = moviesArray[existingMovieIndex];
+
+                let oldCount = existingMovie.ratingCount || 1;
+                let oldRating = parseFloat(existingMovie.rating);
+                
+                let newCount = oldCount + 1;
+                let newRating = ((oldRating * oldCount) + currentRating) / newCount;
+
+                existingMovie.year = year;
+                existingMovie.genre = genre;
+                existingMovie.rating = Math.round(newRating).toString();
+                existingMovie.ratingCount = newCount;
+                
+            } else {
+                const newMovie = {
+                    title: title,
+                    year: year.toString(),
+                    genre: genre,
+                    rating: currentRating.toString(),
+                    ratingCount: 1
+                };
+                moviesArray.push(newMovie);
+            }
 
             localStorage.setItem('movies', JSON.stringify(moviesArray));
 
@@ -208,7 +245,7 @@
 
             let moviesArray = JSON.parse(localStorage.getItem('movies')) || [];
 
-            moviesArray.forEach(movie => {
+            moviesArray.forEach((movie, index) => {
                 const movieDiv = document.createElement('div');
                 movieDiv.className = 'movie-item';
 
@@ -224,14 +261,31 @@
                 }
 
                 movieDiv.innerHTML = `
-                    ${movie.title} (${movie.year}) - ${movie.genre}, Rating: 
-                    <span class="display-stars">${starsHTML}</span>
+                    <div>
+                        ${movie.title} (${movie.year}) - ${movie.genre}, Rating: 
+                        <span class="display-stars">${starsHTML}</span>
+                    </div>
+                    <button class="delete-btn" data-index="${index}">Delete</button>
                 `;
 
                 movieListContainer.appendChild(movieDiv);
             });
-        }
 
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (confirm("Are you sure you want to delete?")) {
+                        const indexToDelete = this.getAttribute('data-index');
+                        let currentMovies = JSON.parse(localStorage.getItem('movies')) || [];
+                        
+                        currentMovies.splice(indexToDelete, 1);
+                        
+                        localStorage.setItem('movies', JSON.stringify(currentMovies));
+                        loadMovies();
+                    }
+                });
+            });
+        }
 
         loadMovies();
     </script>
