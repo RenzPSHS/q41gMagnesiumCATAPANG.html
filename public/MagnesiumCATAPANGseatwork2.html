@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="author" content="<your names>" />
+  <meta name="revised" content="<date today>" />
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .header, .footer {
+      background: lightblue;
+      padding: 10px;
+    }
+    .footer {
+       opacity: 0.5;
+       position: fixed; /*When scrolling the footer stays in the same position relative to the viewport.
+       Unlike the static where it stays in the same position in the page, the fixed makes the footer stay in the same position in the screen.*/
+       bottom: 0; width: 100%;
+    }
+    .sidebar {
+      background: lightgreen;
+      width: 150px;
+      height: 200px;
+      position: relative; /*The position is the same, but moved according to how many pixels in a direction.*/
+      top: 20px; 
+      left: 20px;
+    }
+    .content {
+      background: lightyellow;
+      width: 300px;
+      height: 200px;
+      position: absolute; /*The absolute makes the position of the element relative to its nearest ancestor. It differs from fixed, because fixed makes the position 
+      of the element relative to its viewport.*/
+      top: 66px; 
+      left: 200px;
+    }    
+    .notice {
+    position: absolute; 
+    top: 60px;
+    left: 400px;
+    background: orange;
+    padding: 10px;
+    z-index: 1; /*The notice appears above the content because of its higher z-index value. When the z-index values are swapped, the notice will be covered by the 
+    content because content has a higher index value than notice.*/
+    }
+    /*CHALLENGE:
+        We have to move the notice by pixels to align with the content.
+        The position of content goes down when relative as it changes the position by number of pixels.*/
+    /*3. 
+        Static keeps the position the same. Relative moves the position by a number of pixels in specified directions. Absolute changes it based on nereast ancestor. 
+        Fixed keeps the postion same relative to the viewport.
+        Absolute positioning depends*/
+        
+  </style>
+</head>
+<body>
+  <div class="header">Header</div>
+  <div class="sidebar">Sidebar</div>
+  <div class="content">Main Content</div>
+  <div class="notice">Notice!</div>
+  <div class="footer">Footer</div>
+</body>
+</html>
