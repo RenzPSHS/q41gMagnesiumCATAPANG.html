@@ -42,12 +42,15 @@
     content because content has a higher index value than notice.*/
     }
     /*CHALLENGE:
-        We have to move the notice by pixels to align with the content.
-        The position of content goes down when relative as it changes the position by number of pixels.*/
+        -We have to move the notice by pixels to align with the content.
+        -The position of content goes down when relative as it changes the position by number of pixels.
+        -Depending on Z-index value, the one with higher z-index value goes on top of the one with lower z-index value*/
     /*3. 
-        Static keeps the position the same. Relative moves the position by a number of pixels in specified directions. Absolute changes it based on nereast ancestor. 
-        Fixed keeps the postion same relative to the viewport.
-        Absolute positioning depends*/
+        -Static keeps the position the same. Relative moves the position by a number of pixels in specified directions. Absolute changes it based on nereast ancestor. 
+        -Fixed keeps the postion same relative to the viewport.
+        -Absolute positioning positions itself relative to the parent element.
+        -Sticky stays as fixed but after scrolling to a certain scroll position it becomes relative positioning.
+        -We might have fixed for the top bar so that they can go to other webpages when needed. We can use relative or static so that it won't block the other elements or distract.*/
         
   </style>
 </head>
