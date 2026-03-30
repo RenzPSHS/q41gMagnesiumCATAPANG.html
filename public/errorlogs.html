@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Logs - Renz Edbon A. Catapang</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        h1 { color: #00c8ff; text-align: center; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: #333; color: #00c8ff; }
+        .css_err { color: #ff4757; font-weight: bold; }
+        .js_err { color: #2ed573; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Debugging Log</h1>
+        <p><strong>Author:</strong> [Your Name]</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Type</th>
+                    <th>Approximate Location</th>
+                    <th>Description of Error</th>
+                    <th>How it was Corrected</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="css_err">CSS</td>
+                    <td>.sprite-icon class</td>
+                    <td>Incorrect file path for the background image.</td>
+                    <td>Changed URL to point correctly to the assets folder: <code>url('assets/imageSprites.png')</code>.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="css_err">CSS</td>
+                    <td>.sprite-icon class</td>
+                    <td>Background-size was not scaled for a vertical sprite sheet, causing images to bleed together.</td>
+                    <td>Added <code>background-size: 40px 200px;</code> to define the full vertical height of the 5 stacked images.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="css_err">CSS</td>
+                    <td>#map-frame ID</td>
+                    <td>Missing positioning context for plotting the dots, causing them to fly off the screen.</td>
+                    <td>Added <code>position: relative;</code> to the map container and <code>overflow: hidden;</code> to keep dots inside.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Input Retrieval</td>
+                    <td>Input values were being treated as strings instead of numbers.</td>
+                    <td>Wrapped the <code>document.getElementById().value</code> calls in <code>parseInt()</code>.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Nlogonia Logic Check</td>
+                    <td>Used assignment operator (=) instead of strict equality operator (===) for checking the division line.</td>
+                    <td>Updated the if statement to <code>if (x === n || y === m)</code>.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Nlogonia Logic Check</td>
+                    <td>Incorrect logic operators for determining quadrants (e.g., using AND instead of OR, wrong greater/less than signs).</td>
+                    <td>Rewrote the quadrant logic to strictly match math coordinate rules (e.g., NO is <code>x < n && y > m</code>).</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Table Update Logic</td>
+                    <td>Failed to use needed DOM methods for creating table rows.</td>
+                    <td>Replaced old HTML insertion with <code>document.createElement("tr")</code> and <code>document.createElement("td")</code>.</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Table Update Logic</td>
+                    <td>Failed to attach the newly created elements to the table body.</td>
+                    <td>Used the <code>appendChild()</code> method to correctly nest the <code>td</code> inside the <code>tr</code>, and the <code>tr</code> inside the <code>tbody</code>.</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Table Update Logic</td>
+                    <td>Attempted to set CSS classes using invalid syntax.</td>
+                    <td>Used the <code>element.className = "sprite-icon " + spriteClass</code> attribute to assign the correct CSS classes dynamically.</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="js_err">JavaScript</td>
+                    <td>Plotting Logic</td>
+                    <td>Coordinate math did not account for scaling or standard plane inversion (Y goes up in math, but down in CSS).</td>
+                    <td>Implemented a dynamic scaling math function and subtracted the Y-axis difference from the center point (<code>centerY - (dy * scale)</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
