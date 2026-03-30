@@ -1,129 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Logs - Renz Edbon A. Catapang</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        h1 { color: #00c8ff; text-align: center; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #444;
-            padding: 12px;
-            text-align: left;
-        }
-        th { background-color: #333; color: #00c8ff; }
-        .css_err { color: #ff4757; font-weight: bold; }
-        .js_err { color: #2ed573; font-weight: bold; }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="[Your Name] / [Partner's Name]">
+  <meta name="description" content="testing and debugging">
+  <meta name="keywords" content="testing and debugging">
+  <title>CS3 - Renz Edbon A. Catapang</title>
+  
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <style>
+    tr:nth-child(1) ~ tr:nth-child(odd) {
+      background-color: lightgray;
+      color: black;
+    }
+    td, th {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+    caption {
+      font-size: 2em;
+      font-weight: bold;
+      padding: 10px;
+    }
+
+    #signage-display img {
+      width: 150px;
+      height: auto;
+      margin: 5px;
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <nav>
+      <a href="index.html#start">Table</a>
+      <a href="index.html#input">Input</a>
+      <a href="index.html#output">Output</a>
+      <a href="errorlogs.html">Error Logs</a>
+    </nav>
 
-    <div class="container">
-        <h1>Debugging Log</h1>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Type</th>
-                    <th>Approximate Location</th>
-                    <th>Description of Error</th>
-                    <th>How it was Corrected</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td class="css_err">CSS</td>
-                    <td>.sprite-icon class</td>
-                    <td>Incorrect file path for the background image.</td>
-                    <td>Changed URL to point correctly to the assets folder: <code>url('assets/imageSprites.png')</code>.</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="css_err">CSS</td>
-                    <td>.sprite-icon class</td>
-                    <td>Background-size was not scaled for a vertical sprite sheet, causing images to bleed together.</td>
-                    <td>Added <code>background-size: 40px 200px;</code> to define the full vertical height of the 5 stacked images.</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td class="css_err">CSS</td>
-                    <td>#map-frame ID</td>
-                    <td>Missing positioning context for plotting the dots, causing them to fly off the screen.</td>
-                    <td>Added <code>position: relative;</code> to the map container and <code>overflow: hidden;</code> to keep dots inside.</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Input Retrieval</td>
-                    <td>Input values were being treated as strings instead of numbers.</td>
-                    <td>Wrapped the <code>document.getElementById().value</code> calls in <code>parseInt()</code>.</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Nlogonia Logic Check</td>
-                    <td>Used assignment operator (=) instead of strict equality operator (===) for checking the division line.</td>
-                    <td>Updated the if statement to <code>if (x === n || y === m)</code>.</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Nlogonia Logic Check</td>
-                    <td>Incorrect logic operators for determining quadrants (e.g., using AND instead of OR, wrong greater/less than signs).</td>
-                    <td>Rewrote the quadrant logic to strictly match math coordinate rules (e.g., NO is <code>x < n && y > m</code>).</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Table Update Logic</td>
-                    <td>Failed to use needed DOM methods for creating table rows.</td>
-                    <td>Replaced old HTML insertion with <code>document.createElement("tr")</code> and <code>document.createElement("td")</code>.</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Table Update Logic</td>
-                    <td>Failed to attach the newly created elements to the table body.</td>
-                    <td>Used the <code>appendChild()</code> method to correctly nest the <code>td</code> inside the <code>tr</code>, and the <code>tr</code> inside the <code>tbody</code>.</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Table Update Logic</td>
-                    <td>Attempted to set CSS classes using invalid syntax.</td>
-                    <td>Used the <code>element.className = "sprite-icon " + spriteClass</code> attribute to assign the correct CSS classes dynamically.</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td class="js_err">JavaScript</td>
-                    <td>Plotting Logic</td>
-                    <td>Coordinate math did not account for scaling or standard plane inversion (Y goes up in math, but down in CSS).</td>
-                    <td>Implemented a dynamic scaling math function and subtracted the Y-axis difference from the center point (<code>centerY - (dy * scale)</code>).</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <h1 style="padding: 30px">Renz Edbon A. Catapang / 9-Magnesium - Mar 2026 </h1>
+  </header>
 
+  <section id="table">
+    <table> 
+      <caption> Error Logs - 10 Errors Found </caption>
+      <tr class="rColor">
+        <th> item# </th> 
+        <th> code line# <br>(File) </th> 
+        <th> Description</th>
+        <th> Correction Done</th>
+      </tr>
+      <tr>
+        <td> 1 </td> 
+        <td> HTML 43 </td> 
+        <td>Duplicate ID: Both the section and the H2 heading share the ID "output".</td>
+        <td>Changed the H2 ID to "output-heading" to avoid conflicts.</td>
+      </tr>
+      <tr>
+        <td> 2 </td> 
+        <td> HTML 38 </td> 
+        <td>Implicit Globals: The button onclick tries to access x0.value directly.</td>
+        <td>Updated to use document.getElementById('x0').value.</td>
+      </tr>
+      <tr>
+        <td> 3 </td> 
+        <td> CSS 25 </td> 
+        <td>Navigation scrolls: Requirement states it must not scroll with content.</td>
+        <td>Added "position: fixed; top: 0;" to the nav selector.</td>
+      </tr>
+      <tr>
+        <td> 4 </td> 
+        <td> CSS 36 </td> 
+        <td>Space in Pseudo-class: "nav a :hover" looks for children instead of link state.</td>
+        <td>Removed the space to "nav a:hover".</td>
+      </tr>
+      <tr>
+        <td> 5 </td> 
+        <td> CSS 49 </td> 
+        <td>Missing Position: The ".point" class is missing the positioning for left/bottom.</td>
+        <td>Added "position: absolute;".</td>
+      </tr>
+      <tr>
+        <td> 6 </td> 
+        <td> JS 1 </td> 
+        <td>Missing Parameters: The function definition lacks the (x0, y0, x, y) variables.</td>
+        <td>Added parameters: function plotPoint(x0, y0, x, y).</td>
+      </tr>
+      <tr>
+        <td> 7 </td> 
+        <td> JS 2 </td> 
+        <td>Unbound ID: "in1.innerHTML" relies on the browser creating a global variable.</td>
+        <td>Used document.getElementById('in1').innerHTML.</td>
+      </tr>
+      <tr>
+        <td> 8 </td> 
+        <td> JS 7 </td> 
+        <td>Syntax Error: "point.styleleft" is not a valid JS property.</td>
+        <td>Corrected to "point.style.left".</td>
+      </tr>
+      <tr>
+        <td> 9 </td> 
+        <td> JS 8 </td> 
+        <td>Syntax Error: "point.stylebottom" is not a valid JS property.</td>
+        <td>Corrected to "point.style.bottom".</td>
+      </tr>
+      <tr>
+        <td> 10 </td> 
+        <td> JS 12 </td> 
+        <td>Unbound ID: "out1.innerHTML" is used without definition.</td>
+        <td>Used document.getElementById('out1').innerHTML.</td>
+      </tr>
+    </table>
+    <hr>
+  </section>
+
+  <footer>
+    <a href="https://facebook.com"> <div class="icon facebook"></div> </a>
+    <a href="https://twitter.com"> <div class="icon twitter"></div> </a>
+    <a href="https://github.com"> <div class="icon github"></div> </a>
+  </footer>
 </body>
 </html>
